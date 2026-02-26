@@ -1,11 +1,56 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include "Account.h"
 
 using namespace std;
 
+void loadAccounts(vector<Account> &accounts) {
+    ifstream file("data/accounts.txt");
+
+    // file existence check
+    if(!file) {
+        cout << "No existing data file found. Starting fresh.\n";
+        return;
+    }
+
+    string line;
+
+    while(getline(file, line)) {
+        stringstream ss(line);
+
+        int accNo, pin;
+        string name;
+        double balance;
+
+        ss >> accNo >> name >> balance >> pin;
+
+        accounts.push_back(Account(accNo, name, balance, pin));
+    }
+
+    file.close();
+}
+
+void saveAccounts(vector<Account> &accounts) {
+    ofstream file("data/accounts.txt");
+
+    for(auto &acc : accounts) {
+        file << acc.getAccountNumber() << " "
+            << acc.getName() << " "
+            << acc.getBalance() << " "
+            << acc.getPin() << "\n";
+    }
+
+    file.close();
+}
+
 int main() {
     vector<Account> accounts;
+
+    // load accounts at the start
+    loadAccounts(accounts);
+
     int choice;
     
     while(true) {
@@ -16,6 +61,7 @@ int main() {
         cout << "4. Display Amount\n";
         cout << "5. Exit\n";
         cout << "Enter your choice: ";
+        
         cin >> choice;
         
         switch(choice) {
@@ -57,8 +103,12 @@ int main() {
                         cout << "Enter amount to deposit: ";
                         cin >> amount;
 
-                        acc.deposit(amount);
-                        cout << "Deposit successful!\n";
+                        if(acc.deposit(amount)) {
+                            cout << "Deposit Successfully!\n";
+                        } else {
+                            cout << "Invalid deposit amount.\n";
+                        }
+
                         found = true;
                         break;
                     }
@@ -112,7 +162,9 @@ int main() {
                 for(auto &acc : accounts) {
 
                     if(acc.getAccountNumber() == accNo) {
-                        acc.display();
+                        cout << "Account Holder: " << acc.getName() << endl;
+                        cout << "Available Balance: " << acc.getBalance() << endl;
+
                         found = true;
                         break;
                     }
@@ -125,7 +177,9 @@ int main() {
             }
 
             case 5: {
-                cout << "Exiting Program...\n";
+                saveAccounts(accounts);
+
+                cout << "Data saved successfully. Exiting Program...\n";
                 return 0;
             }
 

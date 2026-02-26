@@ -17,8 +17,9 @@ public:
     int getAccountNumber() const;
     int getPin() const;
     double getBalance() const;
+    string getName() const;
 
-    void deposit(double amount);
+    bool deposit(double amount);
     bool withdraw(double amount);
 
     void display() const;

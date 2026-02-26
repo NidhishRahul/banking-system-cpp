@@ -20,20 +20,22 @@ double Account::getBalance() const {
     return balance;
 }
 
-void Account::deposit(double amount) {
-    balance += amount;
+string Account::getName() const {
+    return name;
+}
+
+bool Account::deposit(double amount) {
+    if(amount > 0) {
+        balance += amount;
+        return true;
+    }
+    return false;
 }
 
 bool Account::withdraw(double amount) {
-    if (amount > balance) {
-        return false;
+    if(amount > 0 && amount <= balance) {
+        balance -= amount;
+        return true;
     }
-    balance -= amount;
-    return true;
-}
-
-void Account::display() const {
-    cout << "Account Number: " << accountNumber << endl;
-    cout << "Name: " << name << endl;
-    cout << "Balance: " << balance << endl;
+    return false;
 }
