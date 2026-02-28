@@ -1,0 +1,15 @@
+# Executables
+*.exe
+
+# Object files
+*.o
+
+# Build output
+*.out
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
