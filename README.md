@@ -40,6 +40,13 @@ and defensive programming principles.
 - Menu input validation
 - Defensive programming implementation
 
+### Phase 6 – Code Refactoring & Automatic Save
+- Introduced helper function to find accounts (removed repeated search loops)
+- Refactored deposit, withdraw, and display logic
+- Automatic save after account creation, deposit, and withdrawal
+- Improved program structure and readability
+- Fixed logic issues in account display section
+
 ---
 
 ## Features Implemented
@@ -51,6 +58,7 @@ and defensive programming principles.
 - Multiple accounts support
 - Duplicate account prevention
 - Input validation for numeric fields
+- Automatic data save after transactions
 - Data persistence between program runs
 
 ---
@@ -67,6 +75,8 @@ and defensive programming principles.
 - String parsing (`stringstream`)
 - Input stream error handling
 - Defensive programming
+- Code refactoring
+- Pointer-based object access
 
 ---
 
@@ -83,6 +93,7 @@ Banking-System/
 │   └── accounts.txt
 │
 ├── run.bat
+├── .gitignore
 └── README.md
 
 ---
@@ -105,13 +116,14 @@ g++ -I../include *.cpp -o bank
 ✔ User-error resistant  
 ✔ Persistent storage enabled  
 ✔ PIN-protected transactions  
+✔ Automatic save after operations  
+✔ Cleaner internal architecture  
 
 ---
 
 ## Upcoming Phases
 
 - Transaction history logging
-- Automatic save after each transaction
-- Refactoring repeated logic into helper functions
 - Improved file write safety (temporary file strategy)
 - Admin/User role separation
+- Further architectural abstraction (Bank class)
