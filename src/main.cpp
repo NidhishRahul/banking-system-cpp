@@ -3,7 +3,6 @@
 #include <sstream>
 #include <vector>
 #include <limits>
-#include <ctime>
 
 #include "Account.h"
 
@@ -61,6 +60,7 @@ void saveAccounts(vector<Account> &accounts) {
     file.close();
 }
 
+// reusable input validation for monetary amounts
 double getValidAmount() {
     double amount;
 
@@ -181,7 +181,7 @@ int main() {
                 // auto-save
                 saveAccounts(accounts);
 
-                cout << "Deposit Successfully!\n";
+                cout << "Deposit successfully!\n";
                 break;
             }
 
@@ -212,7 +212,7 @@ int main() {
 
                 if(acc->withdraw(amount)) {
                     saveAccounts(accounts);  // PHASE 6 CHANGE (auto-save)
-                    cout << "Withdrawal Successfully!\n";
+                    cout << "Withdrawal successfully!\n";
                     } else {
                     cout << "Insufficient Balance.\n";
                 }
@@ -242,7 +242,7 @@ int main() {
                 }
 
                 cout << "Account Holder: " << acc->getName() << endl;
-                cout << "Available Balance: " << acc->getBalance() << endl;
+                cout << "Balance       : " << acc->getBalance() << endl;
 
                 break;
             }
